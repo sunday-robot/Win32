@@ -2,7 +2,7 @@
 
 namespace Win32
 {
-    public static class Util
+    public static class Win32Util
     {
         public static void ThrowWin32Exception(string apiName)
         {

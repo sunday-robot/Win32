@@ -2,12 +2,12 @@
 #pragma warning disable CA1401 // P/Invokes は参照可能にすることはできません(stringを引数に取るメソッドに対する無意味なメッセージを抑止する)
 
 using System.Runtime.InteropServices;
-using static Win32.Delagate;
-using static Win32.Struct;
+using static Win32.Win32Delagate;
+using static Win32.Win32Struct;
 
 namespace Win32
 {
-    public static class Function
+    public static class Win32Function
     {
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern IntPtr CreateWindowEx(
