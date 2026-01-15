@@ -1,6 +1,6 @@
-﻿namespace Win32
+﻿namespace Win32Api
 {
-    public static class Win32Constant
+    public static partial class Win32
     {
         public const uint FO_DELETE = 3;
         public const ushort FOF_ALLOWUNDO = 0x0040;

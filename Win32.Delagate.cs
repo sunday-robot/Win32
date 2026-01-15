@@ -1,9 +1,8 @@
 ﻿using System.Runtime.InteropServices;
-using static Win32.Win32Struct;
 
-namespace Win32
+namespace Win32Api
 {
-    public static class Win32Delagate
+    public static partial class Win32
     {
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate bool MonitorEnumProc(IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, IntPtr dwData);

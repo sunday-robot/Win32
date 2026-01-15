@@ -1,9 +1,8 @@
 ﻿using System.Runtime.InteropServices;
-using static Win32.Win32Delagate;
 
-namespace Win32
+namespace Win32Api
 {
-    public static class Win32Struct
+    public static partial class Win32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct MONITORINFOEX

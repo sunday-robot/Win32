@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Win32
+namespace Win32Api
 {
-    public static class Win32Util
+    public static class Util
     {
         public static void ThrowWin32Exception(string apiName)
         {
