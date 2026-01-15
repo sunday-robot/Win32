@@ -33,11 +33,21 @@ namespace Win32Api
             public int Y;
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        // RAWHID は可変長構造体のため、C# の struct では正確に表現できない。
+        // RAWINPUT の union においても RAWHID は記載しない。
+        // HID データを扱う場合は、RAWINPUTHEADER の後ろのメモリを手動で読み取る必要がある。
+        [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
         public struct RAWINPUT
         {
+            [FieldOffset(0)]
             public RAWINPUTHEADER header;
+
+            // union の先頭
+            [FieldOffset(16)]
             public RAWMOUSE mouse;
+
+            [FieldOffset(16)]
+            public RAWKEYBOARD keyboard;
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -56,6 +66,17 @@ namespace Win32Api
             public uint dwSize;
             public IntPtr hDevice;
             public IntPtr wParam;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RAWKEYBOARD
+        {
+            public ushort MakeCode;      // USHORT
+            public ushort Flags;         // USHORT
+            public ushort Reserved;      // USHORT
+            public ushort VKey;          // USHORT
+            public uint Message;         // UINT
+            public uint ExtraInformation; // ULONG
         }
 
         [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
@@ -113,7 +134,7 @@ namespace Win32Api
             public string pFrom;
             public string pTo;
             public ushort fFlags;
-            public bool fAnyOperationsAborted;
+            public int fAnyOperationsAborted;
             public IntPtr hNameMappings;
             public string lpszProgressTitle;
         }
@@ -131,7 +152,7 @@ namespace Win32Api
             public IntPtr hCursor;
             public IntPtr hbrBackground;
             public IntPtr lpszMenuName; // メニュー名または MAKEINTRESOURCE なリソース ID
-            public string lpszClassName;
+            public IntPtr lpszClassName;
             public IntPtr hIconSm;
         }
     }
