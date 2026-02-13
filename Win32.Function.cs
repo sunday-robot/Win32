@@ -26,6 +26,9 @@ namespace Win32Api
         public static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, MonitorEnumProc lpfnEnum, IntPtr dwData);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern uint GetCompressedFileSize(string lpFileName, out uint lpFileSizeHigh);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int GetCurrentThreadId();
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
