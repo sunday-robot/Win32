@@ -139,6 +139,14 @@ namespace Win32Api
             public string lpszProgressTitle;
         }
 
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct SHQUERYRBINFO
+        {
+            public int cbSize;       // 構造体サイズ
+            public long i64Size;     // ゴミ箱内の合計サイズ（バイト）
+            public long i64NumItems; // ゴミ箱内のアイテム数
+        }
+
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct WNDCLASSEX
         {

@@ -2,6 +2,7 @@
 #pragma warning disable CA1401 // P/Invokes は参照可能にすることはできません(stringを引数に取るメソッドに対する無意味なメッセージを抑止する)
 
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Win32Api
 {
@@ -51,6 +52,12 @@ namespace Win32Api
             IntPtr hRawInput, uint uiCommand, IntPtr pData,
             ref uint pcbSize, uint cbSizeHeader);
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern bool GetVolumeNameForVolumeMountPoint(
+            string lpszVolumeMountPoint,
+            StringBuilder lpszVolumeName,
+            int cchBufferLength);
+
         [DllImport("User32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern IntPtr MonitorFromPoint(System.Drawing.Point pt, uint dwFlags);
 
@@ -75,11 +82,17 @@ namespace Win32Api
             uint uiNumDevices,
             uint cbSize);
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern bool RemoveDirectory(string lpPathName);
+
         [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool SetCursorPos(int X, int Y);
 
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         public static extern int SHFileOperation(ref SHFILEOPSTRUCT fileOp);
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        public static extern int SHQueryRecycleBin(string pszRootPath, ref SHQUERYRBINFO pSHQueryRBInfo);
 
         [DllImport("shlwapi.dll", CharSet = CharSet.Unicode)]
         public static extern int StrCmpLogicalW(string x, string y);
